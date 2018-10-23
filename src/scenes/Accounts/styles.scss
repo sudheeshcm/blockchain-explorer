@@ -1,0 +1,21 @@
+.accounts__contents__wrapper {
+  position: relative;
+
+  .loading__wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
+}
+.table--accounts {
+  &.loading {
+    filter: blur(1px);
+  }
+  .table__row--loading {
+    height: 100px;
+
+    .cell {
+      text-align: center;
+    }
+  }
+}

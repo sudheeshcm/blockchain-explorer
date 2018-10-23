@@ -1,0 +1,36 @@
+.footer {
+  background: #464646;
+  color: #fff;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 9999;
+  height: 30px;
+  text-align: center;
+}
+
+.footercontainer {
+  margin: 8px auto;
+  text-align: center;
+}
+
+.spacer {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.text,
+.link {
+  padding: 2px 5px;
+  font-size: 10px;
+}
+
+.link,
+.link:active,
+.link:visited {
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+}
+
+.link:hover {
+  color: rgba(255, 255, 255, 1);
+}

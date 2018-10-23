@@ -1,0 +1,38 @@
+.link.header__wrapper {
+  color: #fff;
+
+  &:hover {
+    color: hsla(0, 0%, 100%, 0.6);
+
+    .header__logo {
+      filter: brightness(70%) invert(1);
+    }
+  }
+}
+
+h6.header__title {
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+.header__logo {
+  height: 25px;
+  width: 25px;
+  filter: brightness(0) invert(1);
+  display: inline-block;
+  margin-right: 8px;
+}
+
+div .network__control {
+  width: 300px;
+  position: absolute;
+  left: 250px;
+  top: 0;
+
+  & label {
+    color: transparent;
+  }
+  &__select {
+    color: white;
+  }
+}
