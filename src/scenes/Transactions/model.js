@@ -1,38 +1,29 @@
 import { dispatch } from '@rematch/core';
 // import request from '@Services/ApiService';
 
-const tempData = [
-  {
-    id: '0xa40518a0dc3bd8d9defa98176d8b04cdb5ce2ef3',
-    balance: 9999.99,
-  },
-  {
-    id: '0x1d250518a0dc3bd8d9defa98176d8b04cdb5ce2ee4',
-    balance: 4563.33,
-  },
-];
+import mockData from './tests/__mocks__/transactions';
 
 export const initialState = {
   loading: false,
   _errors: {},
   lastUpdated: 0,
-  items: [...tempData],
+  items: [...mockData],
   selected: null,
 };
 
 export default {
   state: initialState,
   reducers: {
-    fetchAccounts: state => ({
+    fetchTransactions: state => ({
       ...state,
       loading: true,
     }),
-    fetchAccountsSuccess: (state, payload) => ({
+    fetchTransactionsSuccess: (state, payload) => ({
       ...state,
       loading: false,
       items: payload,
     }),
-    fetchAccountsFailed: state => ({
+    fetchTransactionsFailed: state => ({
       ...state,
       loading: false,
     }),
@@ -40,9 +31,9 @@ export default {
       ...state,
       items: [...state.items, payload],
     }),
-    fetchAccount: (state, payload) => {
+    fetchTransaction: (state, payload) => {
       const selected = state.items.find(
-        i => i.id.toString() === payload.id.toString(),
+        i => i.hash.toString() === payload.id.toString(),
       );
       return {
         ...state,
@@ -51,7 +42,7 @@ export default {
     },
   },
   effects: {
-    async fetchAccounts(payload, state) {
+    async fetchTransactions(payload, state) {
       try {
         /* const { response } = await request({
           method: 'GET',
@@ -63,11 +54,13 @@ export default {
             const selectedNetwork = state.networks.items.find(
               i => i.networkId.toString() === payload.networkId.toString(),
             );
-            items = selectedNetwork ? selectedNetwork.preFundedAccounts : [];
+            items = selectedNetwork
+              ? selectedNetwork.preFundedTransactions
+              : [];
           } else {
-            items = tempData;
+            items = mockData;
           }
-          dispatch.accounts.fetchAccountsSuccess(items);
+          dispatch.accounts.fetchTransactionsSuccess(items);
           if (payload.getNotified) {
             dispatch.notification.show({
               content: 'Account details fetched successfully',
@@ -76,7 +69,7 @@ export default {
           }
         }, 1000);
       } catch (error) {
-        dispatch.accounts.fetchAccountsFailed();
+        dispatch.accounts.fetchTransactionsFailed();
         /* dispatch.notification.show({
           header: 'Account details fetch Failed',
           content: 'Please try again later.',

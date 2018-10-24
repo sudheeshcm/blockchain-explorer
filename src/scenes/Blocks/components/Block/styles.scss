@@ -1,0 +1,20 @@
+.block__contents__wrapper {
+  max-width: 1024px;
+  margin: 0 auto;
+
+  .loading__wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
+
+  .transactions__title {
+     margin-top: 36px;
+     font-size: 18px;
+  }
+
+  .transactions__table {
+    box-shadow: none;
+    margin: 0 auto;
+  }
+}

@@ -1,0 +1,14 @@
+.empty_search_results {
+  margin-top: 24px;
+  color: grey;
+  position: relative;
+
+  .warning__icon {
+    position: absolute;
+    top: -10px;
+  }
+
+  .empty__text {
+    margin: 0px 44px;
+  }
+}

@@ -1,4 +1,7 @@
-.account__contents__wrapper {
+.transaction__contents__wrapper {
+  max-width: 1024px;
+  margin: 0 auto;
+
   .loading__wrapper {
     position: absolute;
     top: 50%;

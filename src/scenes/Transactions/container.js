@@ -1,20 +1,20 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 
-import Account from './component';
+import Transactions from './component';
 
 const mapStateToProps = state => ({
-  loading: state.accounts.loading,
-  account: state.accounts.selected,
+  loading: state.transactions.loading,
+  transactions: state.transactions.items,
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchAccount: dispatch.accounts.fetchAccount,
+  fetchTransactions: dispatch.transactions.fetchTransactions,
 });
 
 export default withRouter(
   connect(
     mapStateToProps,
     mapDispatchToProps,
-  )(Account),
+  )(Transactions),
 );

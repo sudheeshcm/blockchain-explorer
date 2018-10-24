@@ -2,17 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles, MuiThemeProvider } from '@material-ui/core/styles';
 import defaultTheme from '@Styles/theme';
-import Drawer from '@material-ui/core/Drawer';
-import List from '@material-ui/core/List';
+// import Drawer from '@material-ui/core/Drawer';
+// import List from '@material-ui/core/List';
 import { Route } from 'react-router-dom';
 import Overview from '@Scenes/Overview';
-import Store from '@Scenes/Store';
-import Accounts from '@Scenes/Accounts';
+import Transactions from '@Scenes/Transactions';
+import Blocks from '@Scenes/Blocks';
 import Header from '@Components/Header';
 import Footer from '@Components/Footer';
 import Notification from '@Components/Notification';
 import Dialog from '@Components/Dialog';
-import ListItems from './components/ListItems';
+// import ListItems from './components/ListItems';
+import classnames from 'classnames';
 
 const drawerWidth = 240;
 
@@ -24,12 +25,16 @@ const styles = theme => ({
     position: 'relative',
     display: 'flex',
   },
+  background: {
+    backgroundColor: '#efefef !important',
+  },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
   },
   drawerPaper: {
     position: 'relative',
     width: drawerWidth,
+    background: '#e4e4e469',
   },
   content: {
     flexGrow: 1,
@@ -47,13 +52,16 @@ const styles = theme => ({
 });
 
 function App(props) {
-  const { classes } = props;
-
+  const { classes, location } = props;
+  let isNotHome = false;
+  if (location.pathname !== '/') {
+    isNotHome = true;
+  }
   return (
     <MuiThemeProvider theme={defaultTheme}>
       <div className={classes.root}>
-        <Header classes={classes.appBar} />
-        <Drawer
+        <Header classNames={classes.appBar} />
+        {/* <Drawer
           variant="permanent"
           classes={{
             paper: classes.drawerPaper,
@@ -63,12 +71,17 @@ function App(props) {
           <List>
             <ListItems />
           </List>
-        </Drawer>
-        <main className={classes.content}>
+        </Drawer> */}
+        <main
+          className={classnames(
+            classes.content,
+            isNotHome ? classes.background : '',
+          )}
+        >
           <div className={classes.toolbar} />
           <Route exact path="/" component={Overview} />
-          <Route path="/accounts" component={Accounts} />
-          <Route path="/store" component={Store} />
+          <Route path="/transactions" component={Transactions} />
+          <Route path="/blocks" component={Blocks} />
         </main>
         <Dialog />
         <Notification />
@@ -80,6 +93,9 @@ function App(props) {
 
 App.propTypes = {
   classes: PropTypes.shape({}).isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default withStyles(styles)(App);

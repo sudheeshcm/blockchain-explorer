@@ -8,6 +8,22 @@
       filter: brightness(70%) invert(1);
     }
   }
+
+  .header__link {
+    color: whitesmoke;
+    font-weight: 300;
+    margin: 0 24px;
+    font-size: 18px;
+  }
+
+  &.sub__link {
+    display: inline-block;
+  }
+}
+
+.sub__links {
+  position: absolute;
+  right: 440px;
 }
 
 h6.header__title {
@@ -35,4 +51,5 @@ div .network__control {
   &__select {
     color: white;
   }
+
 }

@@ -1,18 +1,189 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import { shape, string, array } from 'prop-types';
 import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import { withStyles } from '@material-ui/core/styles';
+import classnames from 'classnames';
+import BlocksTable from './components/BlocksTable';
+import TransactionTable from './components/TransactionTable';
 
-export default class Overview extends Component {
-  render() {
+const styles = theme => ({
+  pageWrapper: {
+    maxWidth: '1448px',
+    margin: '0 auto',
+  },
+  root: {
+    flexGrow: 1,
+  },
+  tables: {
+    paddingRight: '90px !important',
+  },
+  transactionTable: {
+    marginTop: '36px',
+  },
+  paper: {
+    padding: theme.spacing.unit * 2,
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+    background: '#f5f5f5',
+  },
+  aboutText: {
+    fontSize: '12px',
+    textAlign: 'left',
+    wordSpacing: '3px',
+    fontWeight: '300',
+    fontFamily: 'Roboto',
+    padding: '8px',
+    color: '#5d5d5d',
+  },
+  hr: {
+    margin: '24px 16px 8px',
+    backgroundColor: 'lightgrey',
+    height: '1px',
+    border: '0',
+  },
+  poweredBy: {
+    textAlign: 'center',
+    fontsize: '13px',
+  },
+  powerLogos: {
+    position: 'relative',
+    minHeight: '36px',
+    height: 'auto',
+    padding: '8px 8px 0',
+    textAlign: 'center',
+  },
+  logos: {
+    width: 'auto',
+    height: '36px',
+  },
+});
+class Overview extends Component {
+  static propTypes = {
+    classes: shape({}).isRequired,
+    searchText: string,
+    searchResults: shape({
+      blocks: array,
+      transactions: array,
+    }),
+  };
+
+  static defaultProps = {
+    searchText: '',
+    searchResults: {},
+  };
+
+  state = {};
+
+  renderSearchResults = () => {
+    const { searchResults } = this.props;
+    const { blocks = [], transactions = [] } = searchResults;
+    if (!blocks.length && !transactions.length) {
+      return (
+        <div className="empty_search_results">
+          <img
+            className="warning__icon"
+            src="/static/img/error_outline.png"
+            alt="no-results"
+          />
+          <div className="empty__text">
+            We could not find any matching <strong>Blocks</strong> or{' '}
+            <strong>Transactions</strong>
+          </div>
+        </div>
+      );
+    }
+
     return (
-      <div className="overview__contents__wrapper">
-        <Typography variant="h3">Overview</Typography>
-        <p>
-          BPaaS is acloud native blockchain as a Service, that can create
-          Blockchain network on top of any cloud (private, public, or hyprid)
-          that can provision a <a href="https://kubernetes.io/">kubernetes</a>{' '}
-          cluster.
-        </p>
+      <div className="empty_search_results">
+        {blocks.length ? (
+          <Fragment>
+            <Typography variant="h6">Blocks</Typography>
+            <BlocksTable />
+          </Fragment>
+        ) : null}
+        {transactions.length ? (
+          <Fragment>
+            <Typography variant="h6">Transactions</Typography>
+            <TransactionTable />
+          </Fragment>
+        ) : null}
+      </div>
+    );
+  };
+
+  render() {
+    const { classes, searchText } = this.props;
+    const isSearching = !!searchText;
+
+    return (
+      <div
+        className={classnames(
+          'overview__contents__wrapper',
+          classes.pageWrapper,
+        )}
+      >
+        {/* <Typography variant="h5">Home</Typography> */}
+        <p />
+        <Grid container spacing={24}>
+          <Grid item xs={12} sm={8} className={classes.tables}>
+            {!isSearching && (
+              <Fragment>
+                <Typography variant="h6">Latest Blocks</Typography>
+                <BlocksTable />
+              </Fragment>
+            )}
+            {isSearching && (
+              <Fragment>
+                <Typography variant="h5">
+                  Search Results for <strong>{searchText}</strong>
+                </Typography>
+                {this.renderSearchResults()}
+              </Fragment>
+            )}
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            <Paper className={classes.paper}>
+              <Typography variant="h6">About</Typography>
+              <Typography variant="body2" className={classes.aboutText}>
+                This is an open-source blockchain explorer with complete REST
+                and websocket APIs that can be used for writing web wallets and
+                other apps that need more advanced blockchain queries. Check out
+                the source code.
+                <br />
+                <br />
+                It is still in development, so be sure to report any bugs and
+                provide feedback for improvement at our github issue tracker.
+              </Typography>
+              <hr className={classes.hr} />
+              <div className={classes.poweredBy}>Powered by</div>
+              <div className={classes.powerLogos}>
+                <img
+                  className={classes.logos}
+                  src="/static/img/consensys_logo_text.png"
+                  alt="logo"
+                />
+              </div>
+            </Paper>
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            sm={8}
+            className={classnames(classes.tables, classes.transactionTable)}
+          >
+            {!isSearching && (
+              <Fragment>
+                <Typography variant="h6">Latest Transactions</Typography>
+                <TransactionTable />
+              </Fragment>
+            )}
+          </Grid>
+        </Grid>
       </div>
     );
   }
 }
+
+export default withStyles(styles)(Overview);

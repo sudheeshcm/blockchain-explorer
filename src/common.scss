@@ -1,5 +1,5 @@
 *{
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', sans-serif !important;
 }
 
 a {
@@ -10,12 +10,15 @@ body {
   margin: 0;
 }
 
-.App-content-4 {
+.App-content-4,
+.App-background-2 {
   min-height: 100vh;
+  padding-bottom: 65px !important;
 }
+
 
 #app {
   font-weight: 300;
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-  font-size: 15px;
+  font-size: 14px;
 }

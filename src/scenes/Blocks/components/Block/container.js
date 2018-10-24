@@ -1,20 +1,20 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 
-import Accounts from './component';
+import Block from './component';
 
 const mapStateToProps = state => ({
-  loading: state.accounts.loading,
-  accounts: state.accounts.items,
+  loading: state.blocks.loading,
+  block: state.blocks.selected,
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchAccounts: dispatch.accounts.fetchAccounts,
+  fetchBlock: dispatch.blocks.fetchBlock,
 });
 
 export default withRouter(
   connect(
     mapStateToProps,
     mapDispatchToProps,
-  )(Accounts),
+  )(Block),
 );
