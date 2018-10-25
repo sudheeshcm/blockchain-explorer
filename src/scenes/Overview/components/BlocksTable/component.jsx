@@ -49,11 +49,8 @@ function SimpleTable(props) {
       <TableHead>
         <TableRow>
           <TableCell>Height</TableCell>
-          <TableCell>Age</TableCell>
-          <TableCell numeric>Transactions</TableCell>
-          <TableCell>Mined By</TableCell>
-          <TableCell numeric>Gas</TableCell>
           <TableCell>Hash</TableCell>
+          <TableCell>Age</TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
@@ -62,13 +59,10 @@ function SimpleTable(props) {
             <TableCell component="th" scope="row">
               <Link to={`/blocks/${row.hash}`}>{row.height}</Link>
             </TableCell>
-            <TableCell>{getNewsDateTime(row.timestamp)}</TableCell>
-            <TableCell numeric>{row.numberOfTransactions || 5}</TableCell>
-            <TableCell>{row.minedBy}</TableCell>
-            <TableCell numeric>{row.gas}</TableCell>
+            <TableCell>{row.hash}</TableCell>
             <TableCell>
               {' '}
-              <Tooltip title={row.hash}>
+              <Tooltip title={getNewsDateTime(row.timestamp)}>
                 <InfoIcon />
               </Tooltip>
             </TableCell>

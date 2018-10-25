@@ -1,10 +1,12 @@
 import React, { Component, Fragment } from 'react';
-import { shape, string, array } from 'prop-types';
+import { shape, string, array, func } from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import classnames from 'classnames';
+import Button from '@material-ui/core/Button';
+import ClearIcon from '@material-ui/icons/ClearOutlined';
 import BlocksTable from './components/BlocksTable';
 import TransactionTable from './components/TransactionTable';
 
@@ -37,6 +39,13 @@ const styles = theme => ({
     padding: '8px',
     color: '#5d5d5d',
   },
+  resultsText: {
+    display: 'inline-block',
+  },
+  clearWrapper: {
+    display: 'inline-block',
+    float: 'right',
+  },
   hr: {
     margin: '24px 16px 8px',
     backgroundColor: 'lightgrey',
@@ -67,6 +76,7 @@ class Overview extends Component {
       blocks: array,
       transactions: array,
     }),
+    onSearch: func.isRequired,
   };
 
   static defaultProps = {
@@ -113,6 +123,8 @@ class Overview extends Component {
     );
   };
 
+  onSearchClear = () => this.props.onSearch({ searchText: '' });
+
   render() {
     const { classes, searchText } = this.props;
     const isSearching = !!searchText;
@@ -124,7 +136,6 @@ class Overview extends Component {
           classes.pageWrapper,
         )}
       >
-        {/* <Typography variant="h5">Home</Typography> */}
         <p />
         <Grid container spacing={24}>
           <Grid item xs={12} sm={8} className={classes.tables}>
@@ -134,11 +145,24 @@ class Overview extends Component {
                 <BlocksTable />
               </Fragment>
             )}
+
             {isSearching && (
               <Fragment>
-                <Typography variant="h5">
-                  Search Results for <strong>{searchText}</strong>
-                </Typography>
+                <div className={classes.resultsText}>
+                  <Typography variant="h5">
+                    Search Results for <strong>{searchText}</strong>
+                  </Typography>
+                </div>
+                <div className={classes.clearWrapper}>
+                  <Button
+                    variant="outlined"
+                    className={classes.clearButton}
+                    onClick={this.onSearchClear}
+                  >
+                    Clear Search
+                    <ClearIcon />
+                  </Button>
+                </div>
                 {this.renderSearchResults()}
               </Fragment>
             )}

@@ -57,6 +57,7 @@ class Header extends React.Component {
   static propTypes = {
     classNames: string.isRequired,
     classes: shape({}).isRequired,
+    searchText: string,
     onSearch: func.isRequired,
     location: shape({
       pathname: string.isRequired,
@@ -64,7 +65,9 @@ class Header extends React.Component {
     push: func.isRequired,
   };
 
-  static defaultProps = {};
+  static defaultProps = {
+    searchText: '',
+  };
 
   state = {};
 
@@ -151,6 +154,7 @@ class Header extends React.Component {
                 root: classes.inputRoot,
                 input: classes.inputInput,
               }}
+              value={this.props.searchText}
               onChange={this.onSearch}
             />
           </div>

@@ -9,7 +9,9 @@ const mapStateToProps = state => ({
   searchResults: state.dataStore.searchResults,
 });
 
-const mapDispatchToProps = () => ({});
+const mapDispatchToProps = dispatch => ({
+  onSearch: dispatch.dataStore.onSearch,
+});
 
 export default withRouter(
   connect(

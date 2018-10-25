@@ -69,35 +69,27 @@ class Block extends Component {
                     <Typography component="h3" className={classes.field}>
                       Block Hash: <strong>{block.hash}</strong>
                     </Typography>
-                    <div className={classes.field}>
-                      <Chip
-                        label={`Gas: ${block.gas} Ether`}
-                        className={classes.chip}
-                        color="primary"
-                        variant="outlined"
-                      />
-                    </div>
                     <Typography component="h3" className={classes.field}>
-                      Time:
+                      Gas:
+                      <strong>{` ${block.gas} Ether`}</strong>
+                    </Typography>
+                    <Typography component="h3" className={classes.field}>
+                      Time:{' '}
                       <strong>
                         {moment.unix(block.timestamp).format('LLLL')}
                       </strong>
                     </Typography>
                     <Typography component="h3" className={classes.field}>
-                      Height:
-                      {block.height}
+                      Height: {block.height}
                     </Typography>
                     <Typography component="h3" className={classes.field}>
-                      Mined By:
-                      {block.minedBy}
+                      Mined By: {block.minedBy}
                     </Typography>
                     <Typography component="h3" className={classes.field}>
-                      Gas Limit:
-                      <strong>{block.gasLimit}</strong>
+                      Gas Limit: <strong>{block.gasLimit}</strong>
                     </Typography>
                     <Typography component="h3" className={classes.field}>
-                      Difficulty:
-                      <strong>{block.difficulty}</strong>
+                      Difficulty: <strong>{block.difficulty}</strong>
                     </Typography>
                     <Typography variant="h6" className="transactions__title">
                       Transactions
