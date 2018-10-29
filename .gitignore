@@ -1,10 +1,4 @@
-node_modules/
-dist/
-.keystore
-.history/
-build/
-yarn-error.log
-package-lock.json
-jsconfig.json
-.vscode
-reports
+node_modules
+.history
+.DS_Store
+build

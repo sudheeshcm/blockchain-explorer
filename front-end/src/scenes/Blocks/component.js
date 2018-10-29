@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Route, Switch, Link } from 'react-router-dom';
-import { bool, shape, arrayOf, string } from 'prop-types';
+import { bool, shape, arrayOf, func, string } from 'prop-types';
 import moment from 'moment';
 import Typography from '@material-ui/core/Typography';
 import Table from '@material-ui/core/Table';
@@ -16,7 +16,7 @@ export default class Blocks extends Component {
   static propTypes = {
     blocks: arrayOf(shape({})),
     loading: bool,
-    // fetchBlocks: func.isRequired,
+    fetchBlocks: func.isRequired,
     match: shape({
       isExact: bool.isRequired,
       params: shape({
@@ -31,10 +31,10 @@ export default class Blocks extends Component {
   };
 
   componentDidMount() {
-    // const params = {
-    //   getNotified: false,
-    // };
-    // this.props.fetchBlocks(params);
+    const params = {
+      getNotified: false,
+    };
+    this.props.fetchBlocks(params);
   }
 
   render() {
@@ -68,7 +68,6 @@ export default class Blocks extends Component {
                       <TableCell>Block Number</TableCell>
                       <TableCell className="hash__cell">Hash</TableCell>
                       <TableCell>Time</TableCell>
-                      <TableCell>Mined By</TableCell>
                       <TableCell>Number of Transactions</TableCell>
                     </TableRow>
                   </TableHead>
@@ -92,7 +91,6 @@ export default class Blocks extends Component {
                             .unix(block.timestamp)
                             .format('MMM DD hh:mm:ss')}
                         </TableCell>
-                        <TableCell>{block.minedBy || ''}</TableCell>
                         <TableCell>{block.numberOfTransactions || 5}</TableCell>
                       </TableRow>
                     ))}

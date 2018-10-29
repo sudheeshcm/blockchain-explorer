@@ -118,6 +118,7 @@ const config = {
   plugins: [
     new webpack.EnvironmentPlugin({
       ENV: process.env.ENV || 'development',
+      API_BASE: process.env.API_BASE || 'http://localhost:3000',
     }),
   ],
 };

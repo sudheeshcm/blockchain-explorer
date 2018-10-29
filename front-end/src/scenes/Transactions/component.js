@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Route, Switch, Link } from 'react-router-dom';
-import { bool, shape, arrayOf, string } from 'prop-types';
+import { bool, shape, arrayOf, func, string } from 'prop-types';
 import moment from 'moment';
 import Typography from '@material-ui/core/Typography';
 import Table from '@material-ui/core/Table';
@@ -16,7 +16,7 @@ export default class Transactions extends Component {
   static propTypes = {
     transactions: arrayOf(shape({})),
     loading: bool,
-    // fetchTransactions: func.isRequired,
+    fetchTransactions: func.isRequired,
     match: shape({
       isExact: bool.isRequired,
       params: shape({
@@ -31,10 +31,10 @@ export default class Transactions extends Component {
   };
 
   componentDidMount() {
-    // const params = {
-    //   getNotified: false,
-    // };
-    // this.props.fetchTransactions(params);
+    const params = {
+      getNotified: true,
+    };
+    this.props.fetchTransactions(params);
   }
 
   render() {

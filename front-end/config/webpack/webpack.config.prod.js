@@ -1,9 +1,10 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const webpackMerge = require('webpack-merge');
 const webpackConfig = require('./webpack.config.common');
 
-const buildPath = path.resolve(__dirname, '../../dist/');
+const buildPath = path.resolve(__dirname, '../../../public/build/');
 
 const prodConfig = webpackMerge(webpackConfig, {
   mode: 'production',
@@ -24,6 +25,7 @@ const prodConfig = webpackMerge(webpackConfig, {
         removeRedundantAttributes: true,
       },
     }),
+    new CopyWebpackPlugin([{ from: 'static', to: 'static' }]),
   ],
 });
 

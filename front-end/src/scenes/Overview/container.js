@@ -11,6 +11,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onSearch: dispatch.dataStore.onSearch,
+  fetchTransactions: dispatch.transactions.fetchTransactions,
+  fetchBlocks: dispatch.blocks.fetchBlocks,
 });
 
 export default withRouter(

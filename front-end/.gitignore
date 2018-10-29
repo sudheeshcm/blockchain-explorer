@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.keystore
+.history/
+build/
+yarn-error.log
+package-lock.json
+jsconfig.json
+.vscode
+reports

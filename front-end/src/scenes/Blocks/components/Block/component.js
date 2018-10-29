@@ -5,9 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Chip from '@material-ui/core/Chip';
 import TransactionTable from '@Scenes/Overview/components/TransactionTable';
-import Divider from '@material-ui/core/Divider';
 
 const styles = theme => ({
   paper: { marginTop: '1.5em', minHeight: '200px', position: 'relative' },

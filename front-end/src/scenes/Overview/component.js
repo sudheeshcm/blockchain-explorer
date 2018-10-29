@@ -71,6 +71,8 @@ const styles = theme => ({
 class Overview extends Component {
   static propTypes = {
     classes: shape({}).isRequired,
+    fetchTransactions: func.isRequired,
+    fetchBlocks: func.isRequired,
     searchText: string,
     searchResults: shape({
       blocks: array,
@@ -85,6 +87,14 @@ class Overview extends Component {
   };
 
   state = {};
+
+  componentDidMount() {
+    const params = {
+      getNotified: false,
+    };
+    this.props.fetchTransactions(params);
+    this.props.fetchBlocks(params);
+  }
 
   renderSearchResults = () => {
     const { searchResults } = this.props;
