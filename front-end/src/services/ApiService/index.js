@@ -6,7 +6,12 @@ import store from '@Root/store';
 
 export const client = axios.create({
   baseURL: process.env.API_BASE,
-  headers: { 'Content-Type': 'application/json' },
+  headers: {
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers':
+      'Origin, X-Requested-With, Content-Type, Accept',
+  },
   paramsSerializer: p => {
     const params = { ...p };
 
